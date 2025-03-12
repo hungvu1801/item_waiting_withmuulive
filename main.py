@@ -53,7 +53,7 @@ def wait_for_button(driver, tab_handle, result_queue, stop_event):
             time.sleep(5)
             quantity_input = driver.find_element(By.ID, "quantity")
             driver.execute_script("arguments[0].value = '1';", quantity_input)
-            button = WebDriverWait(driver, 1).until(
+            button = WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.XPATH, "//div[@class='ec-base-button']"))
             )
             driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", button)
@@ -70,7 +70,7 @@ def wait_for_button(driver, tab_handle, result_queue, stop_event):
                 'status': 'clicked'
             })
             # stop_event.set()
-            # break
+            break
         except (TimeoutException, NoSuchElementException):
             # Button not found yet, continue monitoring
             continue
