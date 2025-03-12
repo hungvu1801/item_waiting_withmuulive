@@ -48,6 +48,7 @@ def wait_for_button(driver, tab_handle, result_queue, stop_event):
     while not stop_event.is_set():
         try:
             driver.switch_to.window(tab_handle)
+            driver.refresh()
             # Adjust the XPATH according to your button's location
             time.sleep(5)
             quantity_input = driver.find_element(By.ID, "quantity")
