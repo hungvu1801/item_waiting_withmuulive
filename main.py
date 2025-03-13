@@ -1,9 +1,9 @@
 import os
 import time
-import concurrent.futures
+# import concurrent.futures
 import sys
-import threading
-import queue
+# import threading
+# import queue
 
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException, WebDriverException
-from urllib3.exceptions import MaxRetryError, ProtocolError
+# from urllib3.exceptions import MaxRetryError, ProtocolError
 
 def open_driver(headless:bool=False, profile:str=None, debug_port:int=None):
     """
@@ -38,6 +38,7 @@ def open_driver(headless:bool=False, profile:str=None, debug_port:int=None):
             options.add_experimental_option("debuggerAddress", f"127.0.0.1:{debug_port}")
             #####################################################
         driver.execute_cdp_cmd("Network.setUserAgentOverride", {"userAgent": user_agent})
+        driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         # driver.maximize_window()
     except Exception as e:
         print(e)
